@@ -391,12 +391,12 @@ void BST_312 <ItemType>::postOrderTraversal(TreeNode* t,vector<ItemType>& result
 {
     //YOUR CODE GOES HERE
     // Post Order Traversal : L R N
-    /* 
+     
     if(t != NULL){
-	postOrderTraversal(t->left);
-	postOrderTraversal(t->right);
+	postOrderTraversal(t->left, result);
+	postOrderTraversal(t->right, result);
 	result.push_back(t->data);
-    }  */  
+    }    
 }
 
 template<class ItemType>
@@ -404,13 +404,13 @@ vector<ItemType> BST_312 <ItemType>::postOrderTraversal()
 {
     //YOUR CODE GOES HERE
     // if tree is empty return empty vector, otherwise traverse
-    /*   
+       
     vector<ItemType> post_order;
     TreeNode *t = root;
     if(t != NULL){
 	postOrderTraversal(t, post_order);
     }
-    return post_order;  */   
+    return post_order; 
 }
 
 template<class ItemType>
