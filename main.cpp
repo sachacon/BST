@@ -23,9 +23,9 @@ int main() {
 
     ifstream inFile;
     inFile.open("test.txt");
-
+     
     BST_312<string> bst;
-   
+              
     string s;
     inFile >> s;
     while (inFile) {;

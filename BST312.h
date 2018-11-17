@@ -13,6 +13,8 @@
 #include <cstdlib>  // Provides size_t
 #include <iostream>
 #include <vector>
+// #include <algorithm>
+// #include <iterator>
 
 using namespace std;
 
@@ -302,7 +304,15 @@ template<class ItemType>
 int BST_312 <ItemType>::countNodes(TreeNode* t) const
 {
     //YOUR CODE GOES HERE
-
+    // node count is root + other nodes, start with 1 node 
+    int node_count = 1;
+    if(t->left != NULL){
+	node_count += countNodes(t->left);
+    }
+    if(t->right != NULL){
+	node_count += countNodes(t->right);
+    }
+    return node_count;
 }
 
 
@@ -310,12 +320,26 @@ template<class ItemType>
 int BST_312 <ItemType>::countNodes()
 {
     //YOUR CODE GOES HERE
+    TreeNode *t = root;
+    int node_count = 0;
+    // if tree is not empty count nodes, if tree empty return 0 
+    if(t != root){
+	node_count = countNodes(t);
+    }
+    return node_count;
 }
 
 template<class ItemType>
 void BST_312 <ItemType>::preOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
     //YOUR CODE GOES HERE
+    // Pre Order Traversal: N L R 
+    
+    if(t != NULL){
+	result.push_back(t->data);
+	preOrderTraversal(t->left, result);
+	preOrderTraversal(t->right, result);
+    }     
 }
 
 
@@ -323,41 +347,97 @@ template<class ItemType>
 vector<ItemType> BST_312 <ItemType>::preOrderTraversal()
 {
     //YOUR CODE GOES HERE
-
+    // if tree is not empty traverse tree, otherwise return empty vector
+    
+    vector<ItemType> pre_order;
+    TreeNode *t = root;
+    if(t != NULL){
+	preOrderTraversal(t, pre_order);
+    }   
+    return pre_order; 
 }
 
 template<class ItemType>
 void BST_312 <ItemType>::inOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
     //YOUR CODE GOES HERE
-
+    // In Order Traversal: L N R 
+     
+    if(t != NULL){
+	inOrderTraversal(t->left, result);
+	result.push_back(t->data);
+	inOrderTraversal(t->right, result);		
+    } 
+	  
+    
 }
 
 template<class ItemType>
 vector<ItemType> BST_312 <ItemType>::inOrderTraversal()
 {
     //YOUR CODE GOES HERE
+    // if tree is empty, return empty vector
+    
+    vector<ItemType> in_order;
+    TreeNode *t = root;
+    if(t != NULL){
+	inOrderTraversal(t, in_order);
+    }
+    return in_order; 
 }
 
 template<class ItemType>
 void BST_312 <ItemType>::postOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
-
     //YOUR CODE GOES HERE
+    // Post Order Traversal : L R N
+    /* 
+    if(t != NULL){
+	postOrderTraversal(t->left);
+	postOrderTraversal(t->right);
+	result.push_back(t->data);
+    }  */  
 }
 
 template<class ItemType>
 vector<ItemType> BST_312 <ItemType>::postOrderTraversal()
 {
     //YOUR CODE GOES HERE
+    // if tree is empty return empty vector, otherwise traverse
+    /*   
+    vector<ItemType> post_order;
+    TreeNode *t = root;
+    if(t != NULL){
+	postOrderTraversal(t, post_order);
+    }
+    return post_order;  */   
 }
 
 template<class ItemType>
 bool BST_312 <ItemType>::isItemInTree(const ItemType& item)
 {
+    //YOUR CODE GOES HERE
+    // get vector with data from tree, loop through for match
+    bool item_in_tree = false;
+    vector<ItemType> items;
+    items = inOrderTraversal();
+    if( find(items.begin(), items.end(), item) ){
+	item_in_tree = true;
+    }
 
-  //YOUR CODE GOES HERE
+    /*
+    bool found = false;
+    vector<ItemType>::iterator iter;
+    iter = items.begin();
+    while(iter != items.end() && !found){
+ 	if(*iter == item){
+	    item_in_tree = true;
+	    found = true;
+        } 
+    iter++;	
+    } */ 
 
+    return item_in_tree;
 }
 #endif
 
