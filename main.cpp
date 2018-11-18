@@ -21,39 +21,61 @@ void print(vector<T> vec){
 
 int main() {
 
+    // open and read from text file 
     ifstream inFile;
     inFile.open("test.txt");
-     
-    BST_312<string> bst;
-              
+    BST_312<string> bst;             
     string s;
+
     inFile >> s;
     while (inFile) {;
         cout << "inserting ... " << s << endl;
         bst.insertItem(s);
         inFile >> s;
     }
-
-    cout << "postorder traversal is " << endl;
+ 
+    cout << "Postorder Traversal: " << endl;
     print(bst.postOrderTraversal());
     cout << endl;
 
-    cout << "preorder traversal is " << endl;
+    cout << "Preorder Traversal: " << endl;
     print(bst.preOrderTraversal());
     cout << endl;
 
-    cout << "inorder traversal is " << endl;
+    cout << "Inorder Traversal: " << endl;
     print(bst.inOrderTraversal());
     cout << endl;
 
-    cout << "Remove items " << endl;
-    cout << "number of nodes in tree before delete is " << bst.countNodes() << endl;
-    s = "tree";
+    // Testing countNodes() and deleteItem()
+    cout << "Number of Nodes in Tree: " << bst.countNodes() << endl;
+    cout << "Removing ... " << s << endl;
+    s = "f";
     bst.deleteItem(s);
-    print(bst.postOrderTraversal());
+    cout << "Inorder Traversal: " << endl;
+    print(bst.inOrderTraversal());
     cout << endl;
-    cout << "number of nodes in tree after delete is " << bst.countNodes() << endl;
+    cout << "Number of Nodes in Tree " << bst.countNodes() << endl;
     cout << endl;
+
+    // Testing isItemInTree()
+    cout << "Checking for 'f' in tree: " << endl;
+    if(bst.isItemInTree(s)){
+	cout << "TRUE" << endl;
+    }
+    else{
+	cout << "FALSE" << endl;
+    }
+    s = "d";
+    cout << "Checking for 'd' in tree: " << endl;
+    if(bst.isItemInTree(s)){
+	cout << "TRUE" << endl;
+    }
+    else{ 
+        cout << "FALSE" << endl; 
+    }
+
+    // Testing makeEmpty() and destructor
+    cout << "Testing makeEmpty() and destructor ... " << endl;
 
 }
 
