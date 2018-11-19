@@ -305,7 +305,7 @@ void BST_312 <ItemType>::insertItem(TreeNode*& t, const ItemType& newItem)
 	t = node;		
     }
     // item already exits in tree, return
-    else if(newItem == t->data){
+    else if(newItem == t->data){ 
 	return;
     }
     else if(newItem < t->data){
@@ -445,18 +445,11 @@ bool BST_312 <ItemType>::isItemInTree(const ItemType& item)
     //YOUR CODE GOES HERE
     // get vector with data from tree, loop through for match
     bool item_in_tree = false;
+    bool found = false;
     vector<ItemType> items;
     items = inOrderTraversal();
-    /*
-    vector<ItemType>::iterator it;
-    it = find(items.begin(), items.end(), item);
-    items = inOrderTraversal();
-    if( it != items.end() ){
-	item_in_tree = true;
-    }   */
 
-    
-    bool found = false;
+    // iterate through and look for item 
     typename vector<ItemType>::iterator iter;
     iter = items.begin();
     while(iter != items.end() && !found){
